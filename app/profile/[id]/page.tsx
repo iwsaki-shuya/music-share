@@ -16,7 +16,6 @@ export default async function ProfilePage({ params }: Props) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // プロフィール取得
   const { data: profile } = await supabase
     .from("profiles")
     .select("id, username, avatar_url, created_at")
@@ -27,7 +26,6 @@ export default async function ProfilePage({ params }: Props) {
     notFound();
   }
 
-  // そのユーザーの投稿を取得
   const { data: posts } = await supabase
     .from("posts")
     .select(
@@ -55,31 +53,31 @@ export default async function ProfilePage({ params }: Props) {
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
       {/* プロフィールヘッダー */}
-      <div className="mb-8 rounded-xl bg-white p-6 shadow-sm border border-gray-100 text-center">
-        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-purple-400 to-pink-400 text-3xl font-bold text-white">
+      <div className="mb-8 glass-strong rounded-2xl p-6 text-center">
+        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-3xl font-bold text-white">
           {profile.username.charAt(0).toUpperCase()}
         </div>
-        <h1 className="mt-4 text-2xl font-bold text-gray-900">
+        <h1 className="mt-4 text-2xl font-bold text-white">
           {profile.username}
         </h1>
-        <p className="mt-1 text-sm text-gray-500">{joinDate} から参加</p>
+        <p className="mt-1 text-sm text-white/40">{joinDate} から参加</p>
         <div className="mt-3 flex justify-center gap-6 text-sm">
           <div>
-            <span className="font-bold text-gray-900">
+            <span className="font-bold text-white">
               {posts?.length ?? 0}
             </span>
-            <span className="ml-1 text-gray-500">投稿</span>
+            <span className="ml-1 text-white/50">投稿</span>
           </div>
         </div>
       </div>
 
       {/* 投稿一覧 */}
-      <h2 className="mb-4 text-lg font-bold text-gray-900">投稿一覧</h2>
+      <h2 className="mb-4 text-lg font-bold text-white">投稿一覧</h2>
 
       {!posts || posts.length === 0 ? (
-        <div className="text-center py-12">
+        <div className="text-center py-12 glass-strong rounded-2xl">
           <p className="text-4xl mb-3">🎶</p>
-          <p className="text-gray-500">まだ投稿がないよ</p>
+          <p className="text-white/50">まだ投稿がないよ</p>
         </div>
       ) : (
         <div className="space-y-4">

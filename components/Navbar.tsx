@@ -44,11 +44,11 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-sm">
+    <nav className="sticky top-0 z-50 glass border-b border-white/10">
       <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-4">
         <Link
           href="/"
-          className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent"
+          className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
         >
           MusicShare
         </Link>
@@ -58,19 +58,19 @@ export default function Navbar() {
             <>
               <Link
                 href="/posts/new"
-                className="rounded-lg bg-purple-600 px-4 py-2 text-sm font-semibold text-white hover:bg-purple-700 transition-colors"
+                className="rounded-lg bg-purple-500/80 px-4 py-2 text-sm font-bold text-white hover:bg-purple-500 transition-colors backdrop-blur-sm"
               >
                 + 投稿する
               </Link>
               <Link
                 href={`/profile/${user.id}`}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+                className="rounded-lg px-3 py-2 text-sm font-medium text-white/80 hover:bg-white/10 transition-colors"
               >
                 マイページ
               </Link>
               <button
                 onClick={handleLogout}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 transition-colors"
+                className="rounded-lg px-3 py-2 text-sm font-medium text-white/50 hover:bg-white/10 hover:text-white/80 transition-colors"
               >
                 ログアウト
               </button>
@@ -79,13 +79,13 @@ export default function Navbar() {
             <>
               <Link
                 href="/login"
-                className="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+                className="rounded-lg px-4 py-2 text-sm font-medium text-white/80 hover:bg-white/10 transition-colors"
               >
                 ログイン
               </Link>
               <Link
                 href="/signup"
-                className="rounded-lg bg-purple-600 px-4 py-2 text-sm font-semibold text-white hover:bg-purple-700 transition-colors"
+                className="rounded-lg bg-purple-500/80 px-4 py-2 text-sm font-bold text-white hover:bg-purple-500 transition-colors backdrop-blur-sm"
               >
                 サインアップ
               </Link>

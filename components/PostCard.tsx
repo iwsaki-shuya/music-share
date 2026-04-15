@@ -49,21 +49,21 @@ function formatDate(dateString: string): string {
 }
 
 const GENRE_COLORS: Record<string, string> = {
-  "J-POP": "bg-blue-100 text-blue-700",
-  "K-POP": "bg-pink-100 text-pink-700",
-  ロック: "bg-red-100 text-red-700",
-  ヒップホップ: "bg-yellow-100 text-yellow-700",
-  "R&B": "bg-purple-100 text-purple-700",
-  EDM: "bg-cyan-100 text-cyan-700",
-  クラシック: "bg-amber-100 text-amber-700",
-  ジャズ: "bg-orange-100 text-orange-700",
-  アニソン: "bg-green-100 text-green-700",
-  ボカロ: "bg-teal-100 text-teal-700",
-  洋楽POP: "bg-indigo-100 text-indigo-700",
-  インディーズ: "bg-violet-100 text-violet-700",
-  メタル: "bg-slate-100 text-slate-700",
-  レゲエ: "bg-lime-100 text-lime-700",
-  その他: "bg-gray-100 text-gray-700",
+  "J-POP": "bg-blue-500/20 text-blue-300 border-blue-500/30",
+  "K-POP": "bg-pink-500/20 text-pink-300 border-pink-500/30",
+  ロック: "bg-red-500/20 text-red-300 border-red-500/30",
+  ヒップホップ: "bg-yellow-500/20 text-yellow-300 border-yellow-500/30",
+  "R&B": "bg-purple-500/20 text-purple-300 border-purple-500/30",
+  EDM: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+  クラシック: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+  ジャズ: "bg-orange-500/20 text-orange-300 border-orange-500/30",
+  アニソン: "bg-green-500/20 text-green-300 border-green-500/30",
+  ボカロ: "bg-teal-500/20 text-teal-300 border-teal-500/30",
+  洋楽POP: "bg-indigo-500/20 text-indigo-300 border-indigo-500/30",
+  インディーズ: "bg-violet-500/20 text-violet-300 border-violet-500/30",
+  メタル: "bg-slate-500/20 text-slate-300 border-slate-500/30",
+  レゲエ: "bg-lime-500/20 text-lime-300 border-lime-500/30",
+  その他: "bg-gray-500/20 text-gray-300 border-gray-500/30",
 };
 
 export default function PostCard({ post, currentUserId }: PostCardProps) {
@@ -72,7 +72,8 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
     ? post.likes.some((like) => like.user_id === currentUserId)
     : false;
 
-  const genreColor = GENRE_COLORS[post.genre] || "bg-gray-100 text-gray-700";
+  const genreColor =
+    GENRE_COLORS[post.genre] || "bg-gray-500/20 text-gray-300 border-gray-500/30";
 
   let embedContent = null;
   if (post.url) {
@@ -96,7 +97,7 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
       embedContent = (
         <div className="mt-3 overflow-hidden rounded-lg">
           <iframe
-            src={`https://open.spotify.com/embed/${spotifyInfo.type}/${spotifyInfo.id}`}
+            src={`https://open.spotify.com/embed/${spotifyInfo.type}/${spotifyInfo.id}?theme=0`}
             width="100%"
             height="152"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -111,7 +112,7 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
           href={post.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 inline-block text-sm text-purple-600 hover:text-purple-500 underline"
+          className="mt-3 inline-block text-sm text-purple-400 hover:text-purple-300 underline"
         >
           リンクを開く
         </a>
@@ -120,33 +121,33 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
   }
 
   return (
-    <article className="rounded-xl bg-white p-5 shadow-sm border border-gray-100 transition-shadow hover:shadow-md">
+    <article className="glass-strong rounded-xl p-5 transition-all hover:bg-black/50">
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
             <Link
               href={`/profile/${post.profiles.id}`}
-              className="text-sm font-medium text-gray-700 hover:text-purple-600 transition-colors"
+              className="text-sm font-medium text-white/70 hover:text-purple-400 transition-colors"
             >
               {post.profiles.username}
             </Link>
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-white/30">
               {formatDate(post.created_at)}
             </span>
           </div>
 
-          <h2 className="text-lg font-bold text-gray-900">{post.title}</h2>
-          <p className="text-sm text-gray-600">{post.artist}</p>
+          <h2 className="text-lg font-bold text-white">{post.title}</h2>
+          <p className="text-sm text-white/60">{post.artist}</p>
 
           <div className="mt-2 flex items-center gap-2">
             <span
-              className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${genreColor}`}
+              className={`inline-block rounded-full border px-2.5 py-0.5 text-xs font-medium ${genreColor}`}
             >
               {post.genre}
             </span>
           </div>
 
-          <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+          <p className="mt-3 text-sm text-white/80 leading-relaxed">
             {post.comment}
           </p>
 
@@ -154,7 +155,7 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
         </div>
       </div>
 
-      <div className="mt-4 flex items-center gap-3 border-t border-gray-100 pt-3">
+      <div className="mt-4 flex items-center gap-3 border-t border-white/10 pt-3">
         <LikeButton
           postId={post.id}
           initialLiked={isLiked}

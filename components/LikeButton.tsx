@@ -20,13 +20,11 @@ export default function LikeButton({
 
   async function handleClick() {
     setLoading(true);
-    // 楽観的更新
     setLiked(!liked);
     setCount(liked ? count - 1 : count + 1);
 
     const result = await toggleLike(postId);
     if (result?.error) {
-      // エラー時は元に戻す
       setLiked(liked);
       setCount(count);
     }
@@ -39,8 +37,8 @@ export default function LikeButton({
       disabled={loading}
       className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
         liked
-          ? "bg-pink-100 text-pink-600"
-          : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+          ? "bg-pink-500/20 text-pink-400 border border-pink-500/30"
+          : "bg-white/5 text-white/40 border border-white/10 hover:bg-white/10 hover:text-white/60"
       }`}
     >
       <span>{liked ? "♥" : "♡"}</span>
