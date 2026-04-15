@@ -2,11 +2,13 @@
 
 import { login } from "./actions";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   async function handleSubmit(formData: FormData) {
     setLoading(true);
@@ -14,8 +16,11 @@ export default function LoginPage() {
     const result = await login(formData);
     if (result?.error) {
       setError(result.error);
+      setLoading(false);
+    } else {
+      router.push("/");
+      router.refresh();
     }
-    setLoading(false);
   }
 
   return (
