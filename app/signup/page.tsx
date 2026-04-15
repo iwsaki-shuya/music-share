@@ -13,13 +13,18 @@ export default function SignupPage() {
   async function handleSubmit(formData: FormData) {
     setLoading(true);
     setError(null);
-    const result = await signup(formData);
-    if (result?.error) {
-      setError(result.error);
+    try {
+      const result = await signup(formData);
+      if (result?.error) {
+        setError(result.error);
+        setLoading(false);
+      } else {
+        router.push("/");
+        router.refresh();
+      }
+    } catch (e) {
+      setError("サインアップに失敗しました。もう一度試してね！");
       setLoading(false);
-    } else {
-      router.push("/");
-      router.refresh();
     }
   }
 

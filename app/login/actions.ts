@@ -18,7 +18,10 @@ export async function login(formData: FormData) {
   });
 
   if (error) {
-    return { error: "メールアドレスかパスワードが間違ってるよ！" };
+    if (error.message.includes("Email not confirmed")) {
+      return { error: "メールアドレスの確認が完了してないよ！管理者にメール確認の無効化を依頼してね。" };
+    }
+    return { error: `ログインに失敗: ${error.message}` };
   }
 
   return { success: true };

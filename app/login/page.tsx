@@ -13,13 +13,18 @@ export default function LoginPage() {
   async function handleSubmit(formData: FormData) {
     setLoading(true);
     setError(null);
-    const result = await login(formData);
-    if (result?.error) {
-      setError(result.error);
+    try {
+      const result = await login(formData);
+      if (result?.error) {
+        setError(result.error);
+        setLoading(false);
+      } else {
+        router.push("/");
+        router.refresh();
+      }
+    } catch (e) {
+      setError("ログインに失敗しました。もう一度試してね！");
       setLoading(false);
-    } else {
-      router.push("/");
-      router.refresh();
     }
   }
 
