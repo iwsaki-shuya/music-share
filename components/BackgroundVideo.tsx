@@ -140,8 +140,12 @@ export default function BackgroundVideo() {
 
       {/* 再生中の曲名 */}
       {isReady && (
-        <div className="absolute bottom-4 right-4 rounded-full bg-white/10 backdrop-blur-sm px-3 py-1.5 text-xs text-white/60">
-          Now Playing: {currentVideo.title}
+        <div className="absolute bottom-6 right-6 glass rounded-xl px-4 py-2.5 flex items-center gap-3">
+          <span className="inline-block h-2.5 w-2.5 rounded-full bg-purple-400 animate-pulse" />
+          <div>
+            <p className="text-[10px] uppercase tracking-widest text-white/40">Now Playing</p>
+            <p className="text-sm font-bold text-white/90">{currentVideo.title}</p>
+          </div>
         </div>
       )}
     </div>
