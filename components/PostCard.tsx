@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LikeButton from "./LikeButton";
+import PostActions from "./PostActions";
 
 type PostCardProps = {
   post: {
@@ -155,12 +156,15 @@ export default function PostCard({ post, currentUserId }: PostCardProps) {
         </div>
       </div>
 
-      <div className="mt-4 flex items-center gap-3 border-t border-white/10 pt-3">
+      <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
         <LikeButton
           postId={post.id}
           initialLiked={isLiked}
           initialCount={likeCount}
         />
+        {currentUserId === post.profiles.id && (
+          <PostActions postId={post.id} />
+        )}
       </div>
     </article>
   );
